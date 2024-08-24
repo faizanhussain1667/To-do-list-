@@ -1,3 +1,19 @@
+def save_task_to_file(file_path, tasks):
+    with open(file_path, "w") as file:
+        for task in tasks:
+            file.write(f"{task['task']} - {'Done' if task['done'] else 'Not Done'}\n")
+
+def load_tasks_from_file(file_path):
+    tasks = []
+    if os.path.exists(file_path):
+        with open(file_path, "r") as file:
+            for line in file:
+                task, status = line.rsplit(" - ", 1)
+                tasks.append({"task": task, "done": status == "Done"})
+    return tasks
+
+
+
 import os
 
 def show_tasks(tasks):
